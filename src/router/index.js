@@ -4,6 +4,8 @@ import Login from  '../components/Login.vue'
 // import Home  from  '../components/Home.vue'
 
 const Home = () => import ('../components/Home.vue')
+const Welcome = () => import ('../components/Welcome.vue')
+const User = () => import ('../components/User/User.vue')
 
 
 Vue.use(VueRouter)
@@ -12,7 +14,15 @@ const routes = [
   /* 重定向到   http://localhost:8080/#/login    */
   {path:'/', redirect: '/login'},
   {path: '/login', component: Login},
-  {path: '/home',  component: Home}
+  {
+    path: '/home',  
+    component: Home,
+    redirect: '/welcome',
+    children: [
+      {path: '/welcome', component: Welcome},
+      {path: '/users', component: User},
+    ]
+  }
 ]
 
 const router = new VueRouter({
